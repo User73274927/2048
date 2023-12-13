@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>2048 | Play</title>
+</head>
+<body>
+    <div class="heading">
+        <img src="res/2048_logo.png" class="logo">
+        <div class="greeting">
+            <t2>Проверь, сможешь ли ты набрать 2048!?</t2>
+            <br>
+            <a href="https://youtube.com">Как играть?</a>
+        </div>
+        <div class="score-panel">
+            <p class="text">Очки:</p>
+            <p class="res">0</p>
+        </div>
+        <div class="score-panel">
+            <p class="text">Макс. Очки:</p>
+            <p class="res">0</p>
+        </div>
+    </div>
+    <hr>
+    <canvas id="game-screen" class="game-screen-style"></canvas>
+    <script src="src/consts.js"></script>
+    <script src="src/Board.js"></script>
+    <script src="src/index.js"></script>
+</body>
+</html>
