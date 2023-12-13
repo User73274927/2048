@@ -9,18 +9,19 @@ class Board {
         this.background_color = '#bbada0';
     }
 
-    _drawCell = (ctx, x, y) => {
+    _drawEmptyCell = (ctx, x, y) => {
         ctx.fillStyle = this.cell_color;
-        ctx.fillRect(x, y, this._cell_size, this._cell_size);
+        ctx.roundRect(x, y, this._cell_size, this._cell_size, 10);
+        ctx.fill();
     }
 
-    _drawCells = (ctx) => {
+    _drawEmptyCells = (ctx) => {
         let cx = this.x + this.indent; 
         let cy = this.y + this.indent;
 
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                this._drawCell(ctx, cx, cy);
+                this._drawEmptyCell(ctx, cx, cy);
                 cx += this.indent + this._cell_size;
             }
             cx = this.x + this.indent; 
@@ -31,6 +32,7 @@ class Board {
     draw(ctx) {
         ctx.fillStyle = this.background_color;
         ctx.fillRect(this.x, this.y, this.board_size, this.board_size);
-        this._drawCells(ctx);
+        this._drawEmptyCells(ctx);
     }
+    
 }
