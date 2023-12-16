@@ -5,7 +5,6 @@ canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
 const board = new Board(canvas.width, 0, 0);
-console.log(CELL_VALUES);
 
 const clear = () => {
     ctx.fillStyle = "#ffffff";
