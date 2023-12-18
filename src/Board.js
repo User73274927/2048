@@ -2,6 +2,7 @@ class Board {
     constructor(board_size, x, y) {
         this.board_size = board_size;
         this._cells = [];
+        this._transitions = [];
         this.x = x;
         this.y = y;
         this.indent = 10;
@@ -18,16 +19,15 @@ class Board {
     }
 
     _drawCell = (ctx, cell) => {
+        let x = this.indent*cell.row + this._cell_size*(cell.row-1);
+        let y = this.indent*cell.col + this._cell_size*(cell.col-1);
+
         ctx.fillStyle = CELL_COLORS[cell.value-1];
         ctx.beginPath();
-        ctx.roundRect(
-            this.indent*cell.row + this._cell_size*(cell.row-1),
-            this.indent*cell.col + this._cell_size*(cell.col-1),
-            this._cell_size, 
-            this._cell_size,
-            10
-        );
+        ctx.roundRect(x, y, this._cell_size, this._cell_size,10);
         ctx.fill();
+
+        this._drawNumber(ctx, x, y, cell.value);
     }
 
     _drawEmptyCells = (ctx) => {
@@ -42,6 +42,17 @@ class Board {
             cx = this.x + this.indent; 
             cy += this._cell_size + this.indent;
         }
+    }
+
+    _drawNumber = (ctx, x, y, value) => {
+        ctx.fillStyle = "#776e65";
+        ctx.font = "bold 32pt system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(CELL_VALUES[value-1], 
+            x+this._cell_size/2, 
+            y+this._cell_size/2
+        );
     }
 
     _drawCells(ctx) {

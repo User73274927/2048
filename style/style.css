@@ -1,5 +1,13 @@
 body {
-    background-color: #eee4d3;
+    background-color: #f5efe6;
+}
+
+hr {
+    width: 90%;
+    height: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #776e65;
 }
 
 .heading {
@@ -53,7 +61,7 @@ body {
 
     > .res {
         margin: 10px;
-        font-weight: 1000;
+        font-weight: bold;
         font-size: 30pt;
         color: #ffffff;
     }
