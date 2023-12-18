@@ -20,7 +20,7 @@
         </div>
         <div class="score-panel">
             <p class="text">Макс. Очки:</p>
-            <p class="res">0</p>
+            <p id="max-score" class="res">0</p>
         </div>
     </div>
     <hr>
@@ -28,10 +28,8 @@
     <script src="src/consts.js"></script>
     <script src="src/Board.js"></script>
     <script src="src/Game.js"></script>
-    <p style="text-align: 
-                center; font-size: 16pt; 
-                margin-top: 70px; color:#56493c;
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+    <button id="new-game-button" class="new-game-button">Новая игра</button>
+    <p class="txt">
         <u><b>КАК ИГРАТЬ:</b></u> используйте клавиши <b>WASD</b>, чтобы переместить плитки.<br>
         Плитки с одинаковым номером <b>сливаются в одну</b>, когда они прикасаются.<br>
         Соединяйте плитки, чтобы добраться до <b>2048!</b></p>
