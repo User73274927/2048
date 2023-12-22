@@ -1,1 +1,1 @@
-A simple 2048. Written on JavaScript
+A simple 2048 web-game. Written on JavaScript
