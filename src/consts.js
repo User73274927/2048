@@ -1,7 +1,7 @@
 const WIDTH = 500;
 const HEIGHT = 500;
 
-const FPS = 60;
+const FPS = 15;
 
 const BOARD_SIZE = 4;
 const CELL_VALUES = [..._getValues()];
@@ -18,8 +18,13 @@ const KEY = {
     up: 38, down: 40, left: 37, right: 39
 }
 
-const TRANSITON_CONFIG = {
-    duration: 10
+const SWIPE_LENGTH = 50;
+const SwipeType = {
+    OFF: 0,
+    UP: 1,
+    DOWN: 2,
+    LEFT: 3,
+    RIGHT: 4
 }
 
 function* _getValues() {

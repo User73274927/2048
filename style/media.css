@@ -1,0 +1,12 @@
+@media screen and (min-width: 1400px) {
+    .score-panel {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        display: inline-block;
+    }
+}

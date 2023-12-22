@@ -12,12 +12,35 @@ const board = new Board(canvas.width, 0, 0);
 const game = new Game();
 let isLose = false;
 
-game.init();
-board.setCells(game.getCells());
+//for mobile
+let touch_down_x, touch_down_y;
+let touch_up_x, touch_up_y;
+
 
 function load() {
     let saved_max_score = sessionStorage.getItem("max-score");
     max_score.innerHTML = (saved_max_score !== null) ? saved_max_score : '0';
+
+    //All event listeners
+    window.addEventListener("keydown", keyDown);
+    canvas.addEventListener("touchstart", touchDown);
+    canvas.addEventListener("touchend", touchUp);
+    canvas.addEventListener('touchmove', scrollOff);
+    canvas.addEventListener("touchcancel", touchCancel);
+    new_game.addEventListener("click", (e) => {
+        if (restartGame()) {
+            window.location.reload();
+        }
+    });
+
+}
+
+function scrollOff(e) {
+    e.preventDefault();
+}
+
+function scrollOn() {
+    document.body.style.overflow = "auto";
 }
 
 function restartGame() {
@@ -55,6 +78,7 @@ function update() {
 }
 
 function keyDown(e) {
+    e.preventDefault();
     switch (e.keyCode) {
         case KEY.w:
         case KEY.up:
@@ -80,27 +104,78 @@ function keyDown(e) {
     update();
 }
 
+function touchDown(e) {
+    touch_down_x = e.changedTouches[0].clientX;
+    touch_down_y = e.changedTouches[0].clientY;
+}
+
+function touchUp(e) {
+    touch_up_x = e.changedTouches[0].clientX;
+    touch_up_y = e.changedTouches[0].clientY;
+
+    switch (defineSwipe()) {
+        case SwipeType.UP:
+            game.setDirection(Direction.UP);
+            break;
+        case SwipeType.DOWN:
+            game.setDirection(Direction.DOWN);
+            break;
+        case SwipeType.LEFT:
+            game.setDirection(Direction.LEFT);
+            break;
+        case SwipeType.RIGHT:
+            game.setDirection(Direction.RIGHT);
+            break;
+    }
+    update();
+    touchReset(e);
+}
+
+function touchCancel(e) {
+    touchReset(e);
+}
+
+function touchReset(e) {
+    touch_down_x = touch_up_x = 0;
+    touch_down_y = touch_up_y = 0;
+}
+
+function defineSwipe() {
+    let deltaX = touch_up_x - touch_down_x;
+    let deltaY = touch_up_y - touch_down_y;
+
+    if (Math.abs(deltaX) < SWIPE_LENGTH && Math.abs(deltaY) < SWIPE_LENGTH) {
+        return SwipeType.OFF;
+    }
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        //swipe by x
+        return (deltaX > 0) ? SwipeType.RIGHT : SwipeType.LEFT;
+    }
+    else {
+        //swipe by y
+        return (deltaY < 0) ? SwipeType.UP : SwipeType.DOWN;
+    }
+}
+
 function maxScoreChanged() {
     if (Number(score.innerHTML) > Number(max_score.innerHTML)) {
         max_score.innerHTML = score.innerHTML;
     }
 }
 
-window.addEventListener("keydown", keyDown);
-new_game.addEventListener("click", (e) => {
-    if (restartGame()) {
-        window.location.reload();
-    }
-});
+function main() {
+    window.onload = load;
+    game.init();
+    board.setCells(game.getCells());
 
+    const loop = setInterval(() => {
+        gameLoop();
+        if (isLose) {
+            sessionStorage.setItem("max-score", max_score.innerHTML);
+            alert("Ты проиграл((\nТвой результат:   " + game.score.toString());
+            clearInterval(loop);
+        }
+    }, 1000 / FPS);
+}
 
-
-load();
-const loop = setInterval(() => {
-    gameLoop();
-    if (isLose) {
-        sessionStorage.setItem("max-score", max_score.innerHTML);
-        alert("Ты проиграл((\nТвой результат:   " + game.score.toString());
-        clearInterval(loop);
-    }
-}, 1000 / FPS);
+main();

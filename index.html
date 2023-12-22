@@ -2,37 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/media.css">
     <title>2048 | Play</title>
 </head>
 <body>
-    <div class="heading">
+    <div id="header" class="heading">
         <img src="res/2048_logo.png" class="logo">
         <div class="greeting">
             <t2>Проверь, сможешь <br>ли ты набрать 2048!?</t2>
             <br>
-            <a href="https://youtube.com">Как играть?</a>
+            <a href="#rules">Как играть?</a>
         </div>
-        <div class="score-panel">
-            <p class="text">Очки:</p>
-            <p id="score" class="res">0</p>
-        </div>
-        <div class="score-panel">
-            <p class="text">Макс. Очки:</p>
-            <p id="max-score" class="res">0</p>
+        <div class="score">
+            <div class="score-panel">
+                <p class="text">Очки:</p>
+                <p id="score" class="res">0</p>
+            </div>
+            <div class="score-panel">
+                <p class="text">Макс. Очки:</p>
+                <p id="max-score" class="res">0</p>
+            </div>
         </div>
     </div>
     <hr>
-    <canvas id="game-screen" class="game-screen-style"></canvas>
+    <div class="container">
+        <canvas id="game-screen" class="game-screen"></canvas>
+        <button id="new-game-button" class="new-game-button">Новая игра</button>
+        <a name="rules"><p class="txt">
+            <u><b>КАК ИГРАТЬ:</b></u> используйте клавиши <b>WASD</b>, чтобы переместить плитки.<br>
+            Плитки с одинаковым номером <b>сливаются в одну</b>, когда они прикасаются.<br>
+            Соединяйте плитки, чтобы добраться до <b>2048!</b>
+        </p></a>
+    </div>
     <script src="src/consts.js"></script>
     <script src="src/Board.js"></script>
     <script src="src/Game.js"></script>
-    <button id="new-game-button" class="new-game-button">Новая игра</button>
-    <p class="txt">
-        <u><b>КАК ИГРАТЬ:</b></u> используйте клавиши <b>WASD</b>, чтобы переместить плитки.<br>
-        Плитки с одинаковым номером <b>сливаются в одну</b>, когда они прикасаются.<br>
-        Соединяйте плитки, чтобы добраться до <b>2048!</b></p>
     <script src="src/index.js"></script>
 </body>
 </html>

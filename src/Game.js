@@ -59,7 +59,7 @@ class Game {
         for (let i = 0; i < BOARD_SIZE; i++) {
             for (let j = 0; j < BOARD_SIZE; j++) {
                 let value = this.board[i][j].value;
-                if (value != 0) {
+                if (value !== 0) {
                     for (let p = 0; p < this.board[i][j].count; p++) {
                         this._cells.push({col: i+1, row: j+1, value: value});
                     }
